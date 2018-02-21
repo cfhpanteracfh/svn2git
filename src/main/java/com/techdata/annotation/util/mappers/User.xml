@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="User">
+ 
+    <resultMap id="result" type="com.techdata.annotation.model.beans.User">
+        <id property="userId" column="id_user" />
+        <result property="username" column="username"/> 
+        <result property="password" column="password"/> 
+        
+    </resultMap>
+ 
+	
+    <select id="selectAll" resultMap="result">
+        SELECT * FROM user;
+    </select>
+ 
+    <select id="selectById" parameterType="int" resultMap="result">
+        SELECT * FROM user WHERE id_user = #{id}
+    </select>
+ 
+    <insert id="insert" parameterType="com.techdata.annotation.model.beans.User" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO user (username, password) VALUES (#{username}, #{password});
+        
+        <selectKey resultType="int" order="AFTER" keyProperty="userId">
+			SELECT LAST_INSERT_ID() as userId
+		</selectKey>
+    </insert>
+ 
+    <update id="update" parameterType="com.techdata.annotation.model.beans.User">
+        UPDATE user
+        SET username = #{name}
+        WHERE id = #{id} 
+    </update>
+ 
+    <delete id="delete" parameterType="int">
+        DELETE from user WHERE id = #{id}
+    </delete>
+</mapper>

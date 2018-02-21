@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+<!-- These are aliases of java classes. This is case sensitive. And it need its right location  --> 
+    <typeAliases>
+        <typeAlias alias="User" type="com.techdata.annotation.model.beans.User"/>  
+       
+                
+    </typeAliases>
+     <!-- This is configuration part Db URL, Driver user and password -->
+    <environments default="development">
+        <environment id="development">
+          <transactionManager type="JDBC"/>
+            <!--  connecting to Local MySql -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/springexample"/>
+                <property name="username" value="root"/>
+                <property name="password" value="mysqlserverSifra2208"/>
+            </dataSource>
+       </environment>
+    </environments>
+    <mappers>
+    <!--  These are MyBatis mapper files similar to ResultSet and 
+          bean.setSomeAttribute(rs.getInt("id_bean")) we now use mappers for that. All sql queries 
+          are in them -->
+       <mapper resource="com/techdata/annotation/util/mappers/User.xml"/>
+      
+       
+       
+    </mappers>
+</configuration>
